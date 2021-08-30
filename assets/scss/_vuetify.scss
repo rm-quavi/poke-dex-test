@@ -1,0 +1,51 @@
+// Global
+.v-dense {
+  .v-messages {
+    display: none !important;
+  }
+
+  .v-input__slot {
+    margin-bottom: 0 !important;
+  }
+
+  .v-text-field__details {
+    display: none;
+  }
+}
+
+.v-application {
+  background: $c-light !important;
+  font-family: 'Nintendo DS BIOS', Arial, Helvetica, sans-serif !important; 
+  letter-spacing: 0.8px;
+  font-weight: 600;
+}
+
+.v-pagination {
+  button.v-pagination__item,
+  button.v-pagination__navigation {
+    background: $c-secondary !important;
+    border: 3px solid $c-primary !important;
+    box-shadow: none;
+
+    &.v-pagination__item--active {
+      background: $c-primary !important;
+      border: 3px solid $c-dark !important;
+    }
+  }
+}
+
+// Autocomplete content
+.v-autocomplete__content {
+  border-radius: 12px !important;
+
+  .v-select-list {
+    background-color: $c-secondary !important;
+
+    .v-list-item__title {
+      font-size: 18px !important;
+      text-transform: capitalize;
+      font-weight: bold !important;
+      letter-spacing: 0.8px;
+    }
+  }
+}
