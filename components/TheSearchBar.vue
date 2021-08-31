@@ -63,7 +63,7 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 .main-search-bar {
-  max-width: 250px;
+  max-width: 250px !important;
 
   .v-input__slot {
     box-shadow: none !important;
