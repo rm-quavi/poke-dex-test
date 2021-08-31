@@ -13,6 +13,15 @@
         :color="getType(type.name).color"
       ) 
         span {{ type.name }}
+      
+      //- Add chip if no items
+      v-chip.detail-chip(
+        small
+        color="primary"
+        v-if="filterDamages[key].length == 0"
+      ) 
+        span None
+      
 </template>
 <script lang="ts">
 import Vue from 'vue'
