@@ -54,7 +54,7 @@ export const actions = {
   fetchPokemon: async ({ state, commit }, id) => {
     let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
     const pokemonData = response.data
-
+    console.log(pokemonData)
     // Set abilities
     let abilities = []
     pokemonData.abilities.forEach(pokemon => abilities.push(pokemon.ability))
@@ -105,9 +105,10 @@ export const actions = {
     }
 
     const pokemon = {
+      id: pokemonData.id,
       name: pokemonData.name,
       weight: pokemonData.weight,
-      image: pokemonData.sprites.front_default,
+      image: pokemonData.sprites.other["official-artwork"].front_default,
       stats: pokemonData.stats,
       moves: pokemonData.moves,
       abilities: abilities,

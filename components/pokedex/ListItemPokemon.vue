@@ -2,8 +2,11 @@
   .pokemon-list-item(@click="openPokemon()")
     .img-container
       v-img.pokemon-list-item-img(
-        :src="getImageUrl()"
+        :src="imgUrl"
         :aspect-ratio="1" 
+        @error="isImgError = true"
+        lazy-src="pokeball-150x150.png" 
+        transition="scale-transition"
       )
     p.pokemon-list-item-name {{ pokemon.name }}
 </template>
@@ -11,20 +14,29 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: ['pokemon'],
+  data() {
+    return {
+      isImgError: false
+    }
+  },
+  computed: {
+    imgUrl() {
+      if (this.isImgError) return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.pokemon.id}.png`
+      else return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokemon.id}.png`
+    }
+  },
   methods: {
-    getImageUrl() {
-      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.pokemon.id}.png`
-    },
     openPokemon() {
       this.$router.push(`/pokemons/${this.pokemon.id}`)
     }
-  }
+  },
 })
 </script>
 <style lang="scss">
 .pokemon-list-item {
   transition: all .3s ease;
   cursor: pointer;
+  padding: 8px;
 
   &:nth-child(odd) {
     .pokemon-list-item-img {
@@ -34,6 +46,7 @@ export default Vue.extend({
 
   .img-container {
     padding: 8px;
+
     .pokemon-list-item-img {
       top: 0;
       position: relative;

@@ -37,6 +37,10 @@ export default Vue.extend({
   },
   mounted() {
     const id = this.$route.params.id
+    if (!id) {
+      this.$router.push("/error")
+      return
+    }
     this.$store.dispatch('pokemon/fetchPokemon', id)
   },
   beforeDestroy() {

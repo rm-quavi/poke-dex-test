@@ -7,7 +7,7 @@
         :key="pokemon.id"
         :pokemon="pokemon"
       )
-    .pagination-container.px-5
+    .pagination-container.px-5(v-if="getPokemons.length != 0")
       v-pagination.mt-4.mt-md-2(
         v-model="pagination"
         :length="paginationLength"
@@ -25,7 +25,8 @@ export default Vue.extend({
   data() {
     return {
       pokemons: [],
-      pagination: 0
+      pagination: 0,
+      isLoading: false
     }
   },
   computed: {
@@ -41,6 +42,7 @@ export default Vue.extend({
   },
   watch: {
     async pagination(newValue, oldValue) {
+      this.isLoading = true
       // scroll to top
       window.scrollTo({top: 0, behavior: 'smooth'});
       // Set page query
@@ -51,6 +53,12 @@ export default Vue.extend({
         this.$router.replace({})
       }
       await this.$store.dispatch('pokemon/fetchPokemons', newValue)
+      this.isLoading = false
+
+      // If no result
+      if (!this.isLoading && this.getPokemons.length == 0) {
+        this.$router.push("/error")
+      }
     }
   }
 })

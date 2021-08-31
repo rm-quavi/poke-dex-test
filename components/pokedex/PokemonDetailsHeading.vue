@@ -1,8 +1,11 @@
 <template lang="pug">
   v-card.pokemon-detail-heading.details-card
     v-img(
-      :src="getPokemon.image"
+      :src="imgUrl"
       :aspect-ratio="1" 
+      @error="isImgError = true"
+      lazy-src="pokeball-150x150.png" 
+      transition="scale-transition"
     )
     h1.pokemon-detail-heading-name {{ getPokemon.name }}
     .details-container.mb-2.mt-4
@@ -66,11 +69,16 @@ export default Vue.extend({
     return {
       abilityDialog: false,
       selectedAbility: {},
-      selectedAbilityEffects: []
+      selectedAbilityEffects: [],
+      isImgError: false
     }
   },
   computed: {
-    ...mapGetters('pokemon',['getPokemon'])
+    ...mapGetters('pokemon',['getPokemon']),
+    imgUrl() {
+      if (this.isImgError) return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${this.getPokemon.id}.png`
+      else return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.getPokemon.id}.png`
+    }
   },
   methods: {
     getType(name) {

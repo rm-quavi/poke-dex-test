@@ -32,16 +32,17 @@ export default Vue.extend({
     ...mapGetters('pokemon',['getAllPokemons'])
   },
   methods: {
-    onType(event: any) {
+    async onType(event: any) {
       if (this.isSearching) return
-      this.searchMessage = 'Search a pokemon..'
       this.isSearching = true
 
       if (this.getAllPokemons.length == 0) {
-        this.$store.dispatch('pokemon/fetchAllPokemons')
+        await this.$store.dispatch('pokemon/fetchAllPokemons')
       }
 
       this.isSearching = false
+      if(!event) this.searchMessage = 'Search a pokemon..'
+      else this.searchMessage = "There are no matches for your search."
     },
   },
   watch: {
@@ -55,8 +56,9 @@ export default Vue.extend({
         this.search = null
       })
       this.$router.push(`/pokemons/${newVal}`)
-    }
-  }
+    },
+  },
+  
 })
 </script>
 <style lang="scss">
