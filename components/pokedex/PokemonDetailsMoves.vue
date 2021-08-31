@@ -1,6 +1,6 @@
 <template lang="pug">
   v-card.details-card.pokemon-details-moves(v-if="getPokemon.moves.length > 0")
-    h3.move-card-title.mb-2 Moves
+    h2.move-card-title.mb-2 Moves
     v-chip.detail-chip(
       v-for="item in getPokemon.moves"
       :key="item.move.name"
