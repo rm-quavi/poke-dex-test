@@ -54,7 +54,6 @@ export const actions = {
   fetchPokemon: async ({ state, commit }, id) => {
     let response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`)
     const pokemonData = response.data
-    console.log(pokemonData)
     // Set abilities
     let abilities = []
     pokemonData.abilities.forEach(pokemon => abilities.push(pokemon.ability))
@@ -117,7 +116,6 @@ export const actions = {
       damageRelations: damageRelations
     } as Pokemon
 
-    console.log("Pokemon Data", pokemon)
     commit('setPokemon', pokemon)
   },
 }

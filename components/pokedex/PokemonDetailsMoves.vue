@@ -41,7 +41,7 @@ export default Vue.extend({
     async selectedMove(newVal) {
       this.selectedMoveEffects = []
       let response = await this.$axios.get(newVal.url)
-      console.log(response.data)
+      // Get only english effects
       response.data.effect_entries.forEach(entry => {
         if (
           !this.selectedMoveEffects.includes(entry.short_effect) &&

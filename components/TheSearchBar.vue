@@ -47,7 +47,6 @@ export default Vue.extend({
   },
   watch: {
     search(newVal) {
-      console.log(newVal)
       if (!newVal) return
       this.$nextTick(() => {
         this.$refs.searchInputRef.$el.querySelector("input").blur()
