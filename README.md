@@ -15,6 +15,9 @@ $ npm run start
 
 # generate static project
 $ npm run generate
+
+# test project using jest
+$ npm run test
 ```
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
